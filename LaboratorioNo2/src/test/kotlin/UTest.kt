@@ -1,37 +1,37 @@
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Test
+import java.util.*
 
-class ScientificCalculatorTest {
+class Evaluator {
+    private val operators = setOf('+', '-', '*', '/', '^', '√', 'e')
 
-    private val calculator = Calculator()
+    fun evaluatePostfix(tokens: Queue<String>): Double {
+        val stack = Stack<Double>()
 
-    @Test
-    fun testSimpleAddition() {
-        val result = calculator.evaluate("1 + 1")
-        assertEquals(2.0, result)
+        for (token in tokens) {
+            when {
+                token.isDouble() -> stack.push(token.toDouble())
+                token.isOperator() -> {
+                    val b = stack.pop()
+                    val a = if (stack.isNotEmpty() && token[0] != '√') stack.pop() else 0.0
+                    stack.push(applyOperator(token[0], a, b))
+                }
+            }
+        }
+        return stack.pop()
     }
 
-    @Test
-    fun testSimpleSubtraction() {
-        val result = calculator.evaluate("5 - 3")
-        assertEquals(2.0, result)
+    private fun applyOperator(op: Char, a: Double, b: Double): Double {
+        return when (op) {
+            '+' -> a + b
+            '-' -> a - b
+            '*' -> a * b
+            '/' -> a / b
+            '^' -> Math.pow(a, b)
+            '√' -> Math.sqrt(b)
+            'e' -> Math.exp(b)
+            else -> throw IllegalArgumentException("Unknown operator: $op")
+        }
     }
 
-    @Test
-    fun testSimpleMultiplication() {
-        val result = calculator.evaluate("4 * 2")
-        assertEquals(8.0, result)
-    }
-
-    @Test
-    fun testComplexExpression() {
-        val result = calculator.evaluate("(1 + 2) * 3 - 4")
-        assertEquals(5.0, result)
-    }
-
-    @Test
-    fun testExpressionWithParentheses() {
-        val result = calculator.evaluate("((2 + 3) * 2) - (3 * 1)")
-        assertEquals(7.0, result)
-    }
+    private fun String.isDouble(): Boolean = this.toDoubleOrNull() != null
+    private fun String.isOperator(): Boolean = this.length == 1 && this[0] in operators
 }

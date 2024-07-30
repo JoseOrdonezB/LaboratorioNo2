@@ -24,6 +24,10 @@ class Evaluator {
             '+' -> a + b
             '-' -> a - b
             '*' -> a * b
+            '/' -> a / b
+            '^' -> Math.pow(a, b)
+            '√' -> Math.sqrt(b)
+            'e' -> Math.exp(b)
             else -> throw IllegalArgumentException("Unknown operator: $op")
         }
     }

@@ -11,7 +11,7 @@ class Evaluator {
                 token.isDouble() -> stack.push(token.toDouble())
                 token.isOperator() -> {
                     val b = stack.pop()
-                    val a = stack.isNotEmpty() && token[0] != '√') stack.pop() else 0.0
+                    val a = if (stack.isNotEmpty() && token[0] != '√') stack.pop() else 0.0
                     stack.push(applyOperator(token[0], a, b))
                 }
             }

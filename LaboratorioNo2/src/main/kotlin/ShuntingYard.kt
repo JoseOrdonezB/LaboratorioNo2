@@ -3,6 +3,7 @@ import java.util.*
 class ShuntingYard {
     private val operators = setOf('+', '-', '*', '/', '^', '√', 'e')
     private val precedence = mapOf('+' to 1, '-' to 1, '*' to 2, '/' to 2, '^' to 3, '√' to 4, 'e' to 4)
+    private val rightAssociative = setOf('^')
 
     fun toPostfix(tokens: List<String>): Queue<String> {
         val outputQueue = LinkedList<String>()

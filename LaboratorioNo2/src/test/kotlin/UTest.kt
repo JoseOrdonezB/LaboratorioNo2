@@ -34,14 +34,19 @@ class ScientificCalculatorTest {
         val result = calculator.evaluate("((2 + 3) * 2) - (3 * 1)")
         assertEquals(7.0, result)
     }
-     @Test
+    @Test
     fun testExponentiation() {
         val result = calculator.evaluate("2 ^ 3")
         assertEquals(8.0, result)
     }
-     @Test
+    @Test
     fun testSquareRoot() {
         val result = calculator.evaluate("√ 16")
         assertEquals(4.0, result)
+    }
+    @Test
+    fun testExponentialFunction() {
+        val result = calculator.evaluate("e 1")
+        assertEquals(Math.exp(1.0), result)
     }
 }

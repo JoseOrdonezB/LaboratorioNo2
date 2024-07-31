@@ -34,4 +34,9 @@ class ScientificCalculatorTest {
         val result = calculator.evaluate("((2 + 3) * 2) - (3 * 1)")
         assertEquals(7.0, result)
     }
+     @Test
+    fun testExponentiation() {
+        val result = calculator.evaluate("2 ^ 3")
+        assertEquals(8.0, result)
+    }
 }

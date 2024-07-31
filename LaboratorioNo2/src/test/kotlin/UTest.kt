@@ -39,4 +39,9 @@ class ScientificCalculatorTest {
         val result = calculator.evaluate("2 ^ 3")
         assertEquals(8.0, result)
     }
+     @Test
+    fun testSquareRoot() {
+        val result = calculator.evaluate("√ 16")
+        assertEquals(4.0, result)
+    }
 }
